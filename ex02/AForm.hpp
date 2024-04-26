@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:40:28 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 18:28:43 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:56:23 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ class AForm
 		AForm(const AForm &copy);
 		AForm &operator=(const AForm &copy);
 		virtual ~AForm();
-		void GradeTooHighException(void) const;
-		void GradeTooLowException(void) const;
-		void FormAlreadySignedException(void) const;
-		void FormNotSignedException(void) const;
 		std::string getName(void) const;
 		std::string getTarget(void) const;	
 		int getMinGrateToSign(void) const;
@@ -36,6 +32,12 @@ class AForm
 		bool isSigned(void) const;
 		void beSigned(const Bureaucrat &b);
 		virtual void execute(const Bureaucrat &executor) const = 0;
+	protected:
+		void beExecuted(const Bureaucrat &executor) const;
+		void GradeTooHighException(void) const;
+		void GradeTooLowException(void) const;
+		void FormAlreadySignedException(void) const;
+		void FormNotSignedException(void) const;
 	private:
 		std::string		_name;
 		bool 			_signed;

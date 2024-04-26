@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:54:09 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 18:59:09 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:58:21 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int main(void)
 {
-	Bureaucrat b("Craimond", 75);
+	Bureaucrat b("Craimond", 76);
 	std::cout << b << std::endl;
 
 	RobotomyRequestForm rrf("Bender");
@@ -32,6 +32,5 @@ int main(void)
 	b.ExecuteForm(rrf);
 	b.ExecuteForm(ppf);
 	b.ExecuteForm(scf);
-
 	return 0;
 }

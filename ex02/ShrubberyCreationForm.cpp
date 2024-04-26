@@ -6,11 +6,12 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:26:03 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 18:52:24 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:51:26 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
 #include <fstream>
 #include <iostream>
 
@@ -31,7 +32,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
-	AForm::execute(executor);
+	beExecuted(executor);
     std::string filename = getName() + "_shrubbery";
 	try
 	{

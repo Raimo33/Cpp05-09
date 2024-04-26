@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:41:17 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 18:58:19 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:50:24 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,20 @@ void AForm::beSigned(const Bureaucrat &b)
 	_signed = true;
 }
 
-void AForm::execute(const Bureaucrat &executor) const
+void AForm::beExecuted(const Bureaucrat &executor) const
 {
-	executor.ExecuteForm(*this);
+	try
+	{
+		if (!isSigned())
+			FormNotSignedException();
+		if (executor.getGrade() > getMinGrateToExecute())
+			GradeTooLowException();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << executor.getName() << " cannot execute " << getName() << ". Reason: " << e.what() << std::endl;
+		return;
+	}
 }
 
 std::ostream &operator<<(std::ostream &os, const AForm &f)

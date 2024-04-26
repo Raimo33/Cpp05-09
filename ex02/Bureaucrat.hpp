@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:24:35 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 18:57:27 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:02:26 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ class Bureaucrat
 		Bureaucrat(const Bureaucrat &copy);
 		Bureaucrat &operator=(const Bureaucrat &copy);
 		~Bureaucrat();
-		void GradeTooHighException(void) const;
-		void GradeTooLowException(void) const;
 		void SignForm(AForm &f) const;
-		void CheckEligibility(AForm const &form) const;
 		void ExecuteForm(AForm const &form) const;
 		std::string getName(void) const;
 		int getGrade(void) const;
+	protected:
+		void GradeTooHighException(void) const;
+		void GradeTooLowException(void) const;
 	private:
 		const std::string	_name;
 		int					_grade;

@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:19:06 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 18:58:19 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:53:38 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,10 @@ void Bureaucrat::SignForm(AForm &f) const
 	}
 }
 
-void Bureaucrat::CheckEligibility(const AForm &f) const
-{
-	if (!f.isSigned())
-		f.FormNotSignedException();
-	if (getGrade() > f.getMinGrateToExecute())
-		f.GradeTooLowException();
-}
-
 void Bureaucrat::ExecuteForm(const AForm &f) const
 {
-	try
-	{
-		CheckEligibility(f);
-		std::cout << getName() << " executed " << f.getName() << std::endl;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << getName() << " cannot execute " << f.getName() << ". Reason: " << e.what() << std::endl;
-	}
+	f.execute(*this);
+	std::cout << getName() << " executed " << f.getName() << std::endl;
 }
 
 std::string Bureaucrat::getName(void) const
