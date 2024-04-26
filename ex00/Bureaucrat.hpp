@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:24:35 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 14:30:36 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:15:32 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 # define BUREAUCRAT_HPP
 
 # include <stdint.h>
+# include <stdexcept>
 # include <string>
+# include <iostream>
 
 class Bureaucrat
 {
 	public:
 		Bureaucrat();
-		Bureaucrat(const uint8_t grade);
-		void GradeTooHighException(void);
-		void GradeTooLowException(void);
-		std::string getName(void);
-		uint8_t getGrade(void);
+		Bureaucrat(const std::string &name, const int grade);
+		Bureaucrat(const Bureaucrat &copy);
+		Bureaucrat &operator=(const Bureaucrat &copy);
 		~Bureaucrat();
+		void GradeTooHighException(void) const;
+		void GradeTooLowException(void) const;
+		std::string getName(void) const;
+		int getGrade(void) const;
 	private:
 		const std::string	_name;
-		uint8_t				_grade;
+		int				_grade;
 };
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &b);
 
 #endif

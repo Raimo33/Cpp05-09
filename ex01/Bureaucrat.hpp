@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:24:35 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 16:15:09 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:02:42 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class Form;
 class Bureaucrat
 {
 	public:
+		Bureaucrat();
 		Bureaucrat(const std::string &name, const int grade);
 		Bureaucrat(const Bureaucrat &copy);
 		Bureaucrat &operator=(const Bureaucrat &copy);

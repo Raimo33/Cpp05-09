@@ -6,12 +6,14 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:19:06 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 16:17:41 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:25:30 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
+
+Bureaucrat::Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(const std::string &name, const int grade) : _name(name)
 {
@@ -20,6 +22,14 @@ Bureaucrat::Bureaucrat(const std::string &name, const int grade) : _name(name)
 	else if (grade > 150)
 		GradeTooLowException();
 	_grade = grade;
+}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &copy) : _name(copy._name), _grade(copy._grade) {}
+
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
+{
+	_grade = copy._grade;
+	return *this;
 }
 
 void Bureaucrat::GradeTooHighException(void) const
@@ -36,8 +46,6 @@ Bureaucrat::~Bureaucrat() {}
 
 void Bureaucrat::SignForm(Form &f) const
 {
-	if (f.isSigned())
-		throw std::runtime_error("Form is already signed");
 	try
 	{
 		f.beSigned(*this);

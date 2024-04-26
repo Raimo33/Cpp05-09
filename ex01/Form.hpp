@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:41:24 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 16:15:23 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:28:49 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Form
 		Form(const Form &copy);
 		Form &operator=(const Form &copy);
 		~Form();
+		void FormAlreadySignedException(void) const;
 		void GradeTooHighException(void) const;
 		void GradeTooLowException(void) const;
 		std::string getName(void) const;

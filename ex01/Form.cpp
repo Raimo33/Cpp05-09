@@ -6,14 +6,24 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:41:17 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 16:17:10 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/26 18:29:03 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
+Form::Form() {}
+
 Form::Form(const std::string &name, const int min_grade_to_sign) : _name(name), _signed(false), _min_grade_to_sign(min_grade_to_sign) {}
+
+Form::Form(const Form &copy) : _name(copy._name), _signed(copy._signed), _min_grade_to_sign(copy._min_grade_to_sign) {}
+
+Form &Form::operator=(const Form &copy)
+{
+	_signed = copy._signed;
+	return *this;
+}
 
 Form::~Form() {}
 
@@ -25,6 +35,11 @@ void Form::GradeTooHighException(void) const
 void Form::GradeTooLowException(void) const
 {
 	throw std::runtime_error("Grade is too low");
+}
+
+void Form::FormAlreadySignedException(void) const
+{
+	throw std::runtime_error("Form is already signed");
 }
 
 std::string Form::getName(void) const
@@ -44,6 +59,8 @@ bool Form::isSigned(void) const
 
 void Form::beSigned(const Bureaucrat &b)
 {
+	if (isSigned())
+		FormAlreadySignedException();
 	if (b.getGrade() > _min_grade_to_sign)
 		GradeTooLowException();
 	_signed = true;
