@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:45:49 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 20:01:46 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:51:57 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ public:
 	~ShrubberyCreationForm();
 	void execute(const Bureaucrat &executor) const;
 };
+
+AForm *createShrubberyCreationForm(const std::string &target);
 
 #endif

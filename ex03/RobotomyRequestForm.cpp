@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:40:46 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 19:51:21 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:51:51 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void RobotomyRequestForm::execute(const Bureaucrat &executor) const
 		std::cout << getTarget() << " has been robotomized successfully" << std::endl;
 	else
 		std::cout << getTarget() << " robotomization failed" << std::endl;
+}
+
+AForm	*createRobotomyRequestForm(const std::string &target)
+{
+	return new RobotomyRequestForm(target);
 }
 
 

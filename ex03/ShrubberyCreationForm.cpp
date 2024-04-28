@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:26:03 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 19:51:26 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:52:01 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 	{
 		std::cerr << e.what() << std::endl;
 	}
+}
+
+AForm	*createShrubberyCreationForm(const std::string &target)
+{
+	return new ShrubberyCreationForm(target);
 }

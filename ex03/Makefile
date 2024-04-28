@@ -6,15 +6,15 @@
 #    By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 15:33:59 by craimond          #+#    #+#              #
-#    Updated: 2024/04/28 15:43:19 by craimond         ###   ########.fr        #
+#    Updated: 2024/04/28 16:32:55 by craimond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = forms
+NAME = intern
 
-SRCS = main.cpp AForm.cpp Bureaucrat.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
+SRCS = main.cpp AForm.cpp Bureaucrat.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
 OBJS = $(SRCS:.cpp=.o)
-HDRS = AForm.hpp Bureaucrat.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp
+HDRS = AForm.hpp Bureaucrat.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Intern.hpp
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98

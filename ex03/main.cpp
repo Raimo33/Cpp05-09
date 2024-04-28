@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:54:09 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 19:58:21 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:04:40 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,26 @@
 #include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
+#include "Intern.hpp"
 
 int main(void)
 {
-	Bureaucrat b("Craimond", 76);
-	std::cout << b << std::endl;
-
-	RobotomyRequestForm rrf("Bender");
-	PresidentialPardonForm ppf("Zaphod");
-	ShrubberyCreationForm scf("Marvin");
-
-	b.SignForm(rrf);
-	b.SignForm(ppf);
-	b.SignForm(scf);
-
-	b.ExecuteForm(rrf);
-	b.ExecuteForm(ppf);
-	b.ExecuteForm(scf);
-	return 0;
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		delete rrf;
+	}
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy requestfake", "Bender");
+		delete rrf;
+	}
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("shrubbery creation", "Manuel");
+		delete rrf;
+	}
 }
