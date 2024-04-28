@@ -6,7 +6,7 @@
 #    By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 15:33:59 by craimond          #+#    #+#              #
-#    Updated: 2024/04/26 18:12:38 by craimond         ###   ########.fr        #
+#    Updated: 2024/04/28 15:43:19 by craimond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,18 +29,24 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(HDRS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	@echo "$(GREEN)$(NAME) is ready$(NC)"
+	@echo "$(GREEN)compiled $(NC)$(NAME)"
 
 %.o: %.cpp
 	@echo "compiling $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "cleaning $(NAME)"
 	@$(RM) $(OBJS)
-	@$(RM) $(NAME)
-	@echo "$(RED)cleaned $(NAME)$(NC)"
+	@echo "$(RED)removed $(NC)$(OBJS)"
 
-re: clean all
+fclean: clean
+	@$(RM) $(NAME)
+	@echo "$(RED)removed $(NC)$(NAME)"
+
+re: fclean all
 
 .PHONY: all clean re
+
+.SILENT: all $(NAME) $(OBJS) clean fclean re
+
+.IGNORE: clean fclean
