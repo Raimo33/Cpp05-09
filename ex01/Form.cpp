@@ -6,14 +6,14 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:41:17 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 18:29:03 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:29:01 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form() {}
+Form::Form() : _name("default"), _signed(false), _min_grade_to_sign(150) {}
 
 Form::Form(const std::string &name, const int min_grade_to_sign) : _name(name), _signed(false), _min_grade_to_sign(min_grade_to_sign) {}
 
