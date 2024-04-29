@@ -6,15 +6,15 @@
 #    By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 15:33:59 by craimond          #+#    #+#              #
-#    Updated: 2024/04/29 14:08:50 by craimond         ###   ########.fr        #
+#    Updated: 2024/04/29 14:37:24 by craimond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = serializer
+NAME = identifier
 
-SRCS = main.cpp Serializer.cpp Data.cpp
+SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-HDRS = Serializer.hpp Data.hpp
+HDRS = Base.hpp A.hpp B.hpp C.hpp
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
