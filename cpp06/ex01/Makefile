@@ -6,15 +6,15 @@
 #    By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 15:33:59 by craimond          #+#    #+#              #
-#    Updated: 2024/04/29 14:44:04 by craimond         ###   ########.fr        #
+#    Updated: 2024/04/29 14:43:38 by craimond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = converter
+NAME = serializer
 
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp Data.cpp Serializer.cpp
 OBJS = $(SRCS:.cpp=.o)
-HDRS = ScalarConverter.hpp
+HDRS = Data.hpp Serializer.hpp
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
