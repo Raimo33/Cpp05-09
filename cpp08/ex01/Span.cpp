@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:46:38 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 23:37:30 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:40:37 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,24 @@
 
 #include <iostream>
 
-Span::Span() : _numbers(),
-			   _sorted_numbers(),
-			   _capacity(_numbers.max_size()),
-			   _current_size(0) {}
+Span::Span() :
+	_numbers(),
+	_sorted_numbers(),
+	_capacity(_numbers.max_size()),
+	_current_size(0) {}
 
-Span::Span(const size_t N) : _numbers(N),
-							 _sorted_numbers(),
-							 _capacity(N),
-							 _current_size(0) {}
+Span::Span(const size_t N) :
+	 _numbers(N),
+	 _sorted_numbers(),
+	 _capacity(N),
+	 _current_size(0) {}
 
-Span::Span(const Span &other) : _numbers(other._numbers),  // chiamo il copy constructor di std::vector
-								_sorted_numbers(other._sorted_numbers),
-								_capacity(other._capacity),
-								_current_size(other._current_size) {}
+Span::Span(const Span &other) : 
+	_numbers(other._numbers),  // chiamo il copy constructor di std::vector
+	_sorted_numbers(other._sorted_numbers),
+	_capacity(other._capacity),
+	_current_size(other._current_size) {}
+
 Span::~Span(){};
 
 Span &Span::operator=(const Span &rhs)
