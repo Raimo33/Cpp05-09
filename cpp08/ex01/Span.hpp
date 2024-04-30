@@ -6,40 +6,62 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:33:04 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 19:22:37 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:38:18 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPAN_HPP
-# define SPAN_HPP
+#define SPAN_HPP
 
 # include <cstddef>
 # include <vector>
+# include <set>
+# include <string>
+# include <algorithm>
+# include <limits>
 
 class Span
 {
-	public:
-		Span();
-		Span(const size_t N);
-		Span(const Span &other);
-		~Span();
-		Span &operator=(const Span &rhs);
-		void addNumber(const int n);
-		size_t shortestSpan(void) const;
-		size_t longestSpan(void) const;
-	private:
-		std::vector<int>	_numbers;
-		std::vector<int>	_sorted_numbers;
-		size_t				_size;
+public:
+	Span();
+	Span(const size_t N);
+	Span(const Span &other);
+	~Span();
+	Span &operator=(const Span &rhs);
+	void addNumber(const int n);
+	size_t shortestSpan(void) const;
+	size_t longestSpan(void) const;
+
+private:
+	std::vector<int> _numbers;
+	std::set<int> _sorted_numbers; // più veloce di std::vector l'inserimento del nuovo numero nella posizione giusta (Red-Black Tree)
+	size_t _capacity;
+	size_t _current_size;
 };
 
-class NotEnoughElementsException : public std::exception
+class CustomException : public std::exception
 {
 	public:
-		virtual const char *what() const throw() //throw() specifica al compiler che la funzione non lancia eccezioni
+		explicit CustomException(const std::string &message) : _message(message) {}
+		virtual ~CustomException() throw() {}
+		virtual const char *what() const throw()
 		{
-			return ("Not enough elements to calculate span");
+			return (_message.c_str());
 		}
+	protected:
+		std::string _message;
+};
+
+class NotEnoughElementsException : public CustomException
+{
+	public:
+		NotEnoughElementsException() : CustomException("Not enough elements to calculate span") {}
+};
+
+class SpanIsFullException : public CustomException
+{
+	public:
+		SpanIsFullException() : CustomException("Span is full: max capacity reached") {}
 };
 
 #endif
