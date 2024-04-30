@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:59:06 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/29 19:34:45 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:02:36 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ std::ostream &operator<<(std::ostream &os, const Array<T> &array)
 	os << "[ ";
 	for (size_t i = 0; i < length - 1; i++)
 		os << array[i] << ", ";
-	os << array[length - 1] << " ]" << std::endl;
+	os << array[length - 1] << " ]";
 	return os;
 }

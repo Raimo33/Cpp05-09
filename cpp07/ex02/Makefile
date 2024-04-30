@@ -6,18 +6,21 @@
 #    By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 15:33:59 by craimond          #+#    #+#              #
-#    Updated: 2024/04/29 19:30:44 by craimond         ###   ########.fr        #
+#    Updated: 2024/04/30 12:08:34 by craimond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = templates
+NAME = array
 
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
 HDRS = Array.hpp Array.tpp
+LEAK_REPORT = leaks.log
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+VERSION = 98
+CFLAGS = -Wall -Wextra -Werror -std=c++$(VERSION)
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes
 
 RM = rm -rf
 
@@ -42,6 +45,12 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(RED)removed $(NAME)$(NC)"
+	@$(RM) $(LEAK_REPORT)
+	@echo "$(RED)removed $(LEAK_REPORT)$(NC)"
+
+leaks: all
+	@valgrind $(VALGRIND_FLAGS) ./$(NAME) 2> $(LEAK_REPORT)
+	@echo "$(GREEN)leak report generated$(NC)"
 
 re: fclean all
 
