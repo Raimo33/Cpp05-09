@@ -6,13 +6,11 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:46:38 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 23:40:37 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/01 00:20:50 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
-
-#include <iostream>
 
 Span::Span() :
 	_numbers(),
@@ -21,7 +19,7 @@ Span::Span() :
 	_current_size(0) {}
 
 Span::Span(const size_t N) :
-	 _numbers(N),
+	 _numbers(),
 	 _sorted_numbers(),
 	 _capacity(N),
 	 _current_size(0) {}
@@ -55,6 +53,17 @@ void Span::addNumber(const int n)
 	_current_size++;
 }
 
+void Span::addNumbers(const std::vector<int>::iterator begin, const std::vector<int>::iterator end)
+{
+	size_t	n_new_elems = std::distance(begin, end);
+
+	if (_current_size + n_new_elems > _capacity)
+		throw SpanIsFullException();
+	_numbers.insert(_numbers.end(), begin, end);
+	_sorted_numbers.insert(begin, end);
+	_current_size += n_new_elems;
+}
+
 size_t Span::shortestSpan(void) const
 {
 	if (_current_size < 2)
@@ -81,4 +90,17 @@ size_t Span::longestSpan(void) const
 		throw NotEnoughElementsException();
 
 	return (*_sorted_numbers.rbegin() - *_sorted_numbers.begin());
+}
+
+void Span::print(void)
+{
+	std::vector<int>::iterator it = _numbers.begin();
+
+	std::cout << "[ ";
+	while (it != _numbers.end() - 1)
+	{
+		std::cout << *it << ", ";
+		it++;
+	}
+	std::cout << *it << " ]" << std::endl;
 }
