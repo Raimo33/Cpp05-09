@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:25:18 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 15:28:20 by craimond         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:32:35 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(void)
 		deque.push_back(i);
 		set.insert(i);
 	}
-
+ 
 	try
 	{
 		int to_find = 6;
