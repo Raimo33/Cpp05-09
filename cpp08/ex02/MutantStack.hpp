@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 09:46:25 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/01 11:02:04 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:08:13 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <iterator>
 
 //uno stack non e' un container, e' un container adapter: gli puoi specificare quale container deve usare dietro le quinte (default deque, altrimenti list, vector, ecc)
-template <typename T, typename Container = std::deque<T> >
+template <typename T = int, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container>
 {
 	public:

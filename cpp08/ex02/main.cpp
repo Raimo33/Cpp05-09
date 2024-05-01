@@ -6,17 +6,21 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:36:13 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/01 10:50:57 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:08:00 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
 
 #include <iostream>
+#include <list>
+#include <vector>
 
 int main()
 {
-	MutantStack<int> mstack;
+	MutantStack<int> 					mstack;
+	// MutantStack<int, std::list<int> >	mstack;
+	// MutantStack<int, std::vector<int> >	mstack;
 
 	mstack.push(5);
 	mstack.push(17);
