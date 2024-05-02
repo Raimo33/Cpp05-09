@@ -6,17 +6,19 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:15:45 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/01 16:25:19 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:23:29 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
+static void	check_args(int argc, char **argv);
+
 int main(int argc, char **argv)
 {
 	check_args(argc, argv);
-	open_files
-	return 0;
+	BitcoinExchange exchange(DATA_FILE);
+	exchange.convertToValues(argv[1]);
 }
 
 static void	check_args(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:56:59 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/01 16:30:42 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:45:24 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,36 @@
 # include <fstream>
 # include <iostream>
 # include <map>
+# include <cstdlib>
+# include <sstream>
+# include <iomanip>
+# include <limits>
+
+# define DATA_FILE "data.csv"
 
 class BitcoinExchange
 {
 	public:
 		BitcoinExchange();
+		BitcoinExchange(const std::string &data);
 		BitcoinExchange(const BitcoinExchange &other);
 		~BitcoinExchange();
 		BitcoinExchange &operator=(const BitcoinExchange &other);
-		
+		void convertToValues(const std::string &input_file) const;
 	private:
+		//compare_dates 
+		double	getClosestPriceAtDate(const std::string &date) const;
+		//the default comparator std::less<std::string> is perfect because the date format yyyy-mm-dd is lexographically ordered
 		std::map<std::string, double, std::less<std::string> > _price_history;
+};
+
+class CantOpenFileException : public std::exception
+{
+	public:
+		virtual const char *what() const throw()
+		{
+			return "Error: cannot open file";
+		}
 };
 
 #endif
