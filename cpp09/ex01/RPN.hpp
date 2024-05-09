@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:52:13 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/09 15:48:23 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:28:39 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ class RPN
 {
 	public:
 		RPN();
+		RPN(RPN const &other);
 		~RPN();
+		RPN &operator=(RPN const &rhs);
 		void	addOperand(const char op);
 		void	addNumber(const int n);
 		int		getResult(void) const;

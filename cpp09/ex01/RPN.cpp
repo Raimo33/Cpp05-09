@@ -6,13 +6,22 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:53:03 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/09 15:50:05 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:28:48 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
 RPN::RPN() : _stack() {}
+
+RPN::RPN(RPN const &other) : _stack(other._stack) {}
+
+RPN &RPN::operator=(RPN const &rhs)
+{
+	if (this != &rhs)
+		_stack = rhs._stack;
+	return (*this);
+}
 
 RPN::~RPN() {}
 
