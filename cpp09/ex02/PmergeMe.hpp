@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*   PsortMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:26:51 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/09 17:28:09 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:23:59 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
-
-class PmergeMe
+# include <vector>
+# include <list>
+template <typename Container>
+class Sorter
 {
 	public:
-		PmergeMe();
-		~PmergeMe();
-		PmergeMe(PmergeMe const &other);
-		PmergeMe &operator=(PmergeMe const &other);
-}
-
+		Sorter();
+		Sorter(Container const &container);
+		Sorter(Sorter const &other);
+		~Sorter();
+		Sorter &operator=(Sorter const &rhs);
+		void	feed(Container const &container);
+		void	sort();
+	private:
+		Container	_container;
+};
 
 #endif

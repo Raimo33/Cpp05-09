@@ -1,8 +1,8 @@
-NAME = PmergeMe
+NAME = PsortMe
 
-SRCS = main.cpp PmergeMe.cpp
+SRCS = main.cpp PsortMe.cpp
 OBJS = $(SRCS:.cpp=.o)
-HDRS = PmergeMe.hpp
+HDRS = PsortMe.hpp
 LEAK_REPORT = leaks.log
 
 CC = c++

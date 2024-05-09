@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:51:36 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/09 15:45:54 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:12:14 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ static bool						is_operator(const char c);
 
 int main(const int argc, const char **argv)
 {
-
-	std::vector<std::string> tokens;
-	RPN						rpn;
-	size_t					n_tokens;
+	std::vector<std::string>	tokens;
+	RPN							rpn;
+	size_t						n_tokens;
 
 	try
 	{
