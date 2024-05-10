@@ -11,25 +11,33 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include "fordJhonsonSort.hpp"
 
-Sorter::Sorter() 
+PmergeMe::PmergeMe() : _container() {}
 
-Sorter::Sorter(std::vector<int> const &vector, std::list<int> const &list) 
+template <typename Container>
+PmergeMe::PmergeMe(Container const &container) : _container(container) {}
 
-Sorter::Sorter(Sorter const &other) 
+PmergeMe::PmergeMe(PmergeMe const &other) : _container(other._container) {}
 
-Sorter &Sorter::operator=(Sorter const &rhs)
+PmergeMe::~PmergeMe() {}
+
+PmergeMe &PmergeMe::operator=(PmergeMe const &rhs)
 {
 	if (this != &rhs)
-	{
-		_vector = rhs._vector;
-		_list = rhs._list;
-	}
-	return (*this);
+		_container = rhs._container;
+	return *this;
 }
 
-Sorter::~Sorter() {}
+template <typename Container>
+void PmergeMe::feed(Container const &container)
+{
+	_container = container;
+}
 
-
-
-void sort()
+void PmergeMe::sort()
+{
+	if (_container.empty())
+		return;
+	fordJhonsonSort(_container.begin(), _container.end());
+}

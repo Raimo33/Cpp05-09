@@ -13,21 +13,32 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
-# include <vector>
-# include <list>
+# include <exception>
+
+# define K 5 //ogni cella avra' K elementi
+
 template <typename Container>
-class Sorter
+class PmergeMe
 {
 	public:
-		Sorter();
-		Sorter(Container const &container);
-		Sorter(Sorter const &other);
-		~Sorter();
-		Sorter &operator=(Sorter const &rhs);
+		PmergeMe();
+		PmergeMe(Container const &container);
+		PmergeMe(PmergeMe const &other);
+		~PmergeMe();
+		PmergeMe &operator=(PmergeMe const &rhs);
 		void	feed(Container const &container);
 		void	sort();
 	private:
 		Container	_container;
+};
+
+class NotANumberException : public std::exception
+{
+	public:
+		virtual const char *what() const throw()
+		{
+			return "Error: not a number";
+		}
 };
 
 #endif
