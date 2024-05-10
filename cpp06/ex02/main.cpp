@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:14:46 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/29 14:41:43 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:19:03 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,18 @@ void identify(Base* p)
 		std::cout << "B" << std::endl;
 	else if (dynamic_cast<C*>(p))
 		std::cout << "C" << std::endl;
-	else
+	else //if all 3 casts fail, the object is of unknown type (an error occured)
 		std::cout << "Unknown" << std::endl;
 }
 
 void identify(Base& p)
 {
-	identify(&p);
+	try
+	{
+		identify(&p);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Error: " << e.what() << std::endl;
+	}
 }
