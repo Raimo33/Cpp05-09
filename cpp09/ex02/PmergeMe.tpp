@@ -1,25 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fordJhonsonSort.cpp                                :+:      :+:    :+:   */
+/*   PsortMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/10 16:35:56 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/10 16:57:06 by craimond         ###   ########.fr       */
+/*   Created: 2024/05/09 17:26:48 by craimond          #+#    #+#             */
+/*   Updated: 2024/05/09 17:51:02 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fordJhonsonSort.hpp"
+#include "PmergeMe.hpp"
 
 template <typename Iterator>
+static void	fordJhonsonSort(Iterator begin, Iterator end);
+template <typename Iterator>
 static void	merge(Iterator begin, Iterator mid, Iterator end);
-
 template <typename Iterator>
 static void	insertionSort(Iterator begin, Iterator end);
 
+template <typename Container>
+PmergeMe<Container>::PmergeMe() : _container() {}
+
+template <typename Container>
+PmergeMe<Container>::PmergeMe(Container const &container) : _container(container) {}
+
+template <typename Container>
+PmergeMe<Container>::PmergeMe(PmergeMe<Container> const &other) : _container(other._container) {}
+
+template <typename Container>
+PmergeMe<Container>::~PmergeMe() {}
+
+template <typename Container>
+PmergeMe<Container> &PmergeMe<Container>::operator=(PmergeMe<Container> const &rhs)
+{
+	if (this != &rhs)
+		_container = rhs._container;
+	return *this;
+}
+
+template <typename Container>
+void PmergeMe<Container>::feed(Container const &container)
+{
+	_container = container;
+}
+
+template <typename Container>
+void PmergeMe<Container>::sort()
+{
+	if (_container.empty())
+		return;
+	fordJhonsonSort(_container.begin(), _container.end());
+}
+
+template <typename Container>
+Container &PmergeMe<Container>::getContainer()
+{
+	return _container;
+}
+
 template <typename Iterator>
-void	fordJhonsonSort(Iterator begin, Iterator end)
+static void	fordJhonsonSort(Iterator begin, Iterator end)
 {
 	size_t size = std::distance(begin, end);
 
@@ -29,7 +70,8 @@ void	fordJhonsonSort(Iterator begin, Iterator end)
 		insertionSort(begin, end);
 	else
 	{
-		Iterator mid = std::next(begin, size / 2); //mid = begin + (size / 2)
+		Iterator mid = begin;
+		std::advance(mid, size / 2);
 		fordJhonsonSort(begin, mid);
 		fordJhonsonSort(mid, end);
 		merge(begin, mid, end);
@@ -44,7 +86,8 @@ void merge(const Iterator begin, const Iterator mid, const Iterator end)
     std::copy(begin, end, temp.begin());
 
     typename std::vector<ValueType>::iterator left = temp.begin();
-    typename std::vector<ValueType>::iterator right = temp.begin() + std::distance(temp.begin(), mid - begin);
+    typename std::vector<ValueType>::iterator right = temp.begin();
+    std::advance(right, std::distance(begin, mid));
     typename std::vector<ValueType>::iterator left_end = right;
     typename std::vector<ValueType>::iterator right_end = temp.end();
     
@@ -57,7 +100,6 @@ void merge(const Iterator begin, const Iterator mid, const Iterator end)
         else
             *target++ = *right++;
     }
-
     std::copy(left, left_end, target);
     std::copy(right, right_end, target);
 }
@@ -66,16 +108,22 @@ template <typename Iterator>
 void insertionSort(Iterator begin, Iterator end)
 {
     if (begin == end)
-		return;
+        return;
 
     for (Iterator i = begin; i != end; ++i)
-	{
+    {
         typename std::iterator_traits<Iterator>::value_type val = *i;
         Iterator j = i;
-        while (j > begin && *(j - 1) > val)
-		{
-            *j = *(j - 1);
+        Iterator k = j;
+
+        while (j != begin) {
+            k = j;
             --j;
+            if (!(*j > val)) {
+                ++j;
+                break;
+            }
+            *k = *j;
         }
         *j = val;
     }

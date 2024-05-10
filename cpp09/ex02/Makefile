@@ -1,8 +1,8 @@
 NAME = PmergeMe
 
-SRCS = main.cpp PmergeMe.cpp fordJhonsonSort.cpp
+SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-HDRS = PmergeMe.hpp fordJhonsonSort.hpp
+HDRS = PmergeMe.hpp PmergeMe.tpp
 LEAK_REPORT = leaks.log
 
 CC = c++
