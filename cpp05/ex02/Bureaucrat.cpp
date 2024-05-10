@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:19:06 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 19:53:38 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:24:02 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,20 @@ void Bureaucrat::ExecuteForm(const AForm &f) const
 {
 	f.execute(*this);
 	std::cout << getName() << " executed " << f.getName() << std::endl;
+}
+
+void Bureaucrat::incrementGrade(void)
+{
+	if (_grade - 1 < 1)
+		GradeTooHighException();
+	_grade--;
+}
+
+void Bureaucrat::decrementGrade(void)
+{
+	if (_grade + 1 > 150)
+		GradeTooLowException();
+	_grade++;
 }
 
 std::string Bureaucrat::getName(void) const

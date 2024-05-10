@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:24:35 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 20:02:26 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:24:36 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ class Bureaucrat
 		~Bureaucrat();
 		void SignForm(AForm &f) const;
 		void ExecuteForm(AForm const &form) const;
+		void incrementGrade(void);
+		void decrementGrade(void);
 		std::string getName(void) const;
 		int getGrade(void) const;
 	protected:

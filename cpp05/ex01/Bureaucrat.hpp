@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:24:35 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 20:02:42 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:24:28 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ class Bureaucrat
 		void GradeTooHighException(void) const;
 		void GradeTooLowException(void) const;
 		void SignForm(Form &f) const;
+		void incrementGrade(void);
+		void decrementGrade(void);
 		std::string getName(void) const;
 		int getGrade(void) const;
 	private:
