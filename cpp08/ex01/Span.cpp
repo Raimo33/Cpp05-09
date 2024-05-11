@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:46:38 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/01 00:20:50 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:11:13 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ size_t Span::shortestSpan(void) const
 		throw NotEnoughElementsException();
 
 	int	shortest_span = std::numeric_limits<int>::max();
-	typename std::set<int>::iterator it = _sorted_numbers.begin();
-	typename std::set<int>::iterator it_next = it;
+	std::set<int>::iterator it = _sorted_numbers.begin();
+	std::set<int>::iterator it_next = it;
 
 	++it_next;
 	while (it_next != _sorted_numbers.end())
@@ -103,4 +103,14 @@ void Span::print(void)
 		it++;
 	}
 	std::cout << *it << " ]" << std::endl;
+}
+
+const char* Span::NotEnoughElementsException::what() const throw()
+{
+	return "Error: not enough elements";
+}
+
+const char* Span::SpanIsFullException::what() const throw()
+{
+	return "Error: span is full";
 }

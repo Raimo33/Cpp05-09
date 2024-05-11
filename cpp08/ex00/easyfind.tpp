@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:23:59 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 13:21:40 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:06:51 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,9 @@ size_t	easyfind(const T &container, const int target)
 	if (it == container.end())
 		throw NotFoundException();
 	return distance(container.begin(), it);
+}
+
+const char* NotFoundException::what() const throw()
+{
+	return "Element not found";
 }

@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:16:08 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 13:31:22 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:06:42 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ size_t	easyfind(const T &container, const int target);
 class NotFoundException : public std::exception
 {
 	public:
-		virtual const char* what() const throw()
-		{
-			return "Element not found";
-		}
+		virtual const char* what() const throw();
 };
 
 # include "easyfind.tpp"

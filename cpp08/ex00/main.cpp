@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:25:18 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 15:32:35 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:07:36 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(void)
  
 	try
 	{
-		int to_find = 6;
+		int to_find = 3;
 
 		std::cout << "Searching for: '" << to_find << "' in all containers" << std::endl;
 		std::cout << "Vector: " << easyfind(vector, to_find) << std::endl; //TODO non funziona
