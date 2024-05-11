@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:52:13 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/09 17:28:39 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:22:29 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,45 +27,36 @@ class RPN
 		void	addOperand(const char op);
 		void	addNumber(const int n);
 		int		getResult(void) const;
+		class	invalidOperandException;
+		class	stackTooSmallException;
+		class	divisionByZeroException;
+		class	invalidExpressionException;
 	private:
 		std::stack<int>	_stack;
 };
 
-class RPNException : public std::exception
+class RPN::invalidOperandException : public std::exception
 {
 	public:
-		RPNException(const std::string &msg) : _message(msg) {}
-		~RPNException() throw() {}
-		virtual const char *what() const throw()
-		{
-			return _message.c_str();
-		}
-	protected:
-		std::string	_message;
+		virtual const char *what() const throw();
 };
 
-class InvalidOperandException : public RPNException
+class RPN::stackTooSmallException : public std::exception
 {
 	public:
-		InvalidOperandException() : RPNException("Error: invalid operand") {}
+		virtual const char *what() const throw();
 };
 
-class StackTooSmallException : public RPNException
+class RPN::divisionByZeroException : public std::exception
 {
 	public:
-		StackTooSmallException() : RPNException("Error: stack too small") {}
+		virtual const char *what() const throw();
 };
 
-class DivisionByZeroException : public RPNException
+class RPN::invalidExpressionException : public std::exception
 {
 	public:
-		DivisionByZeroException() : RPNException("Error: division by zero") {}
-};
-
-class InvalidRNPExpressionException : public RPNException
-{
-	public:
-		InvalidRNPExpressionException() : RPNException("Error: invalid RPN expression") {}
+		virtual const char *what() const throw();
 };
 
 #endif

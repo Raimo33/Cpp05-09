@@ -39,13 +39,4 @@ class PmergeMe
 
 # include "PmergeMe.tpp"
 
-class NotANumberException : public std::exception
-{
-	public:
-		virtual const char *what() const throw()
-		{
-			return "Error: not a number";
-		}
-};
-
 #endif

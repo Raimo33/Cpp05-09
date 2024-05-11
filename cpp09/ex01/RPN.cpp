@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:53:03 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/09 17:28:48 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:23:01 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void RPN::addOperand(const char op)
 	int n1, n2;
 
 	if (_stack.size() < 2)
-		throw StackTooSmallException();
+		throw stackTooSmallException();
 	n2 = _stack.top();
 	_stack.pop();
 	n1 = _stack.top();
@@ -45,14 +45,14 @@ void RPN::addOperand(const char op)
 			break;
 		case '/':
 			if (n2 == 0)
-				throw DivisionByZeroException();
+				throw divisionByZeroException();
 			_stack.push(n1 / n2);
 			break;
 		case '*':
 			_stack.push(n1 * n2);
 			break;
 		default:
-			throw InvalidOperandException();
+			throw invalidOperandException();
 			break;
 	}
 }
@@ -65,6 +65,26 @@ void RPN::addNumber(const int n)
 int	RPN::getResult(void) const
 {
 	if (_stack.size() > 1)
-		throw InvalidRNPExpressionException();
+		throw invalidExpressionException();
 	return (_stack.top());
+}
+
+const char *RPN::invalidOperandException::what() const throw()
+{
+	return ("Error: invalid operand");
+}
+
+const char *RPN::stackTooSmallException::what() const throw()
+{
+	return ("Error: stack too small");
+}
+
+const char *RPN::divisionByZeroException::what() const throw()
+{
+	return ("Error: division by zero");
+}
+
+const char *RPN::invalidExpressionException::what() const throw()
+{
+	return ("Error: invalid expression");
 }

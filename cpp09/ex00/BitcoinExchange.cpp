@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:56:25 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/02 19:14:13 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:21:15 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ BitcoinExchange::BitcoinExchange() : _price_history() {}
 
 BitcoinExchange::BitcoinExchange(const std::string &filename) : _price_history()
 {
+	feed(filename);
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _price_history(other._price_history) {}
+
+BitcoinExchange::~BitcoinExchange() {}
+
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
+{
+	if (this != &other)
+		_price_history = other._price_history;
+	return *this;
+}
+
+void BitcoinExchange::feed(const std::string &filename)
+{
 	std::ifstream		file(filename.c_str());
 	std::string			line;
 	std::istringstream	iss;
@@ -28,7 +44,7 @@ BitcoinExchange::BitcoinExchange(const std::string &filename) : _price_history()
 	double				price_value;
 
 	if (file.is_open() == false)
-		CantOpenFileException();
+		throw CantOpenFileException();
 	while (std::getline(file, line))
 	{
 		date = line.substr(0, line.find(','));
@@ -43,17 +59,6 @@ BitcoinExchange::BitcoinExchange(const std::string &filename) : _price_history()
 	file.close();
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _price_history(other._price_history) {}
-
-BitcoinExchange::~BitcoinExchange() {}
-
-BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
-{
-	if (this != &other)
-		_price_history = other._price_history;
-	return *this;
-}
-
 void BitcoinExchange::convertToValues(const std::string &input_file) const
 {
 	std::ifstream		file(input_file.c_str());
@@ -65,7 +70,7 @@ void BitcoinExchange::convertToValues(const std::string &input_file) const
 	double				transaction_value;
 
 	if (file.is_open() == false)
-		CantOpenFileException();
+		throw CantOpenFileException();
 	while (std::getline(file, line))
 	{
 		if (check_line_validity(line) == false)
@@ -142,4 +147,9 @@ double BitcoinExchange::getClosestPriceAtDate(const std::string &date) const
 	if (it == _price_history.begin()) //date is before the first date in the csv
 		return 0;
 	return (--it)->second; //returns the price just before the date found
+}
+
+const char *BitcoinExchange::CantOpenFileException::what() const throw()
+{
+	return "Error: can't open file";
 }

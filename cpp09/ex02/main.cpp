@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:26:45 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/10 19:44:11 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:31:45 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	fill_containers(Container1 &c1, Container2 &c2, const int n_numbers,
 		iss.str(numbers[i]);
 		iss >> number;
 		if (iss.fail() || !iss.eof())
-			throw NotANumberException();
+			throw std::invalid_argument("Error: not a number");
 		c1.push_back(number);
 		c2.push_back(number);
 		iss.clear();
@@ -103,14 +103,14 @@ static void	sort(size_t &vec_time, size_t &list_time, PmergeMe<Container1> &vec_
 	size_t	end_time;
 	
 	//get deque time
-	start_time = std::clock(); 
+	start_time = clock(); 
 	vec_sorter.sort();
-	end_time = std::clock();
+	end_time = clock();
 	vec_time = (end_time - start_time) * 1000000 / CLOCKS_PER_SEC;
 	//get list time
 	start_time = end_time;
 	list_sorter.sort();
-	end_time = std::clock();
+	end_time = clock();
 	list_time = (end_time - start_time) * 1000000 / CLOCKS_PER_SEC;
 }
 

@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:56:59 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/02 18:45:24 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:20:40 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ class BitcoinExchange
 		BitcoinExchange(const std::string &data);
 		BitcoinExchange(const BitcoinExchange &other);
 		~BitcoinExchange();
+		void feed(const std::string &data);
 		BitcoinExchange &operator=(const BitcoinExchange &other);
 		void convertToValues(const std::string &input_file) const;
+		class CantOpenFileException;
 	private:
 		//compare_dates 
 		double	getClosestPriceAtDate(const std::string &date) const;
@@ -39,13 +41,10 @@ class BitcoinExchange
 		std::map<std::string, double, std::less<std::string> > _price_history;
 };
 
-class CantOpenFileException : public std::exception
+class BitcoinExchange::CantOpenFileException : public std::exception
 {
 	public:
-		virtual const char *what() const throw()
-		{
-			return "Error: cannot open file";
-		}
+		virtual const char *what() const throw();
 };
 
 #endif
