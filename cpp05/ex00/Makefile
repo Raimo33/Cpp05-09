@@ -1,23 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/26 15:33:59 by craimond          #+#    #+#              #
-#    Updated: 2024/04/26 15:34:23 by craimond         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = bureaucrat
 
 SRCS = main.cpp Bureaucrat.cpp
 OBJS = $(SRCS:.cpp=.o)
 HDRS = Bureaucrat.hpp
+LEAK_REPORT = leaks.log
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+VERSION = 98
+CFLAGS = -Wall -Wextra -Werror -std=c++$(VERSION)
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes
 
 RM = rm -rf
 
@@ -27,20 +18,32 @@ NC = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HDRS)
+$(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	@echo "$(GREEN)$(NAME) is ready$(NC)"
+	@echo "$(GREEN)compiled $(NAME)$(NC)"
 
-%.o: %.cpp
+%.o: %.cpp $(HDRS)
 	@echo "compiling $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "cleaning $(NAME)"
 	@$(RM) $(OBJS)
-	@$(RM) $(NAME)
-	@echo "$(RED)cleaned $(NAME)$(NC)"
+	@echo "$(RED)removed $(OBJS)$(NC)"
 
-re: clean all
+fclean: clean
+	@$(RM) $(NAME)
+	@echo "$(RED)removed $(NAME)$(NC)"
+	@$(RM) $(LEAK_REPORT)
+	@echo "$(RED)removed $(LEAK_REPORT)$(NC)"
+
+leaks: all
+	@valgrind $(VALGRIND_FLAGS) ./$(NAME) 2> $(LEAK_REPORT)
+	@echo "$(GREEN)leak report generated$(NC)"
+
+re: fclean all
 
 .PHONY: all clean re
+
+.SILENT: all $(NAME) $(OBJS) clean fclean re
+
+.IGNORE: clean fclean

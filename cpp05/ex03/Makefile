@@ -1,23 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/26 15:33:59 by craimond          #+#    #+#              #
-#    Updated: 2024/04/28 16:32:55 by craimond         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = intern
 
-SRCS = main.cpp AForm.cpp Bureaucrat.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
+SRCS = main.cpp Intern.cpp AForm.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJS = $(SRCS:.cpp=.o)
-HDRS = AForm.hpp Bureaucrat.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Intern.hpp
+HDRS = Intern.hpp AForm.hpp Bureaucrat.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp
+LEAK_REPORT = leaks.log
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+VERSION = 98
+CFLAGS = -Wall -Wextra -Werror -std=c++$(VERSION)
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes
 
 RM = rm -rf
 
@@ -27,21 +18,27 @@ NC = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HDRS)
+$(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	@echo "$(GREEN)compiled $(NC)$(NAME)"
+	@echo "$(GREEN)compiled $(NAME)$(NC)"
 
-%.o: %.cpp
+%.o: %.cpp $(HDRS)
 	@echo "compiling $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJS)
-	@echo "$(RED)removed $(NC)$(OBJS)"
+	@echo "$(RED)removed $(OBJS)$(NC)"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(RED)removed $(NC)$(NAME)"
+	@echo "$(RED)removed $(NAME)$(NC)"
+	@$(RM) $(LEAK_REPORT)
+	@echo "$(RED)removed $(LEAK_REPORT)$(NC)"
+
+leaks: all
+	@valgrind $(VALGRIND_FLAGS) ./$(NAME) 2> $(LEAK_REPORT)
+	@echo "$(GREEN)leak report generated$(NC)"
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:19:06 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/10 16:23:36 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:00:50 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ Bureaucrat::Bureaucrat() {}
 Bureaucrat::Bureaucrat(const std::string &name, const int grade) : _name(name)
 {
 	if (grade < 1)
-		GradeTooHighException();
+		throw GradeTooHighException();
 	else if (grade > 150)
-		GradeTooLowException();
+		throw GradeTooLowException();
 	_grade = grade;
 }
 
@@ -31,29 +31,19 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
 	return *this;
 }
 
-void Bureaucrat::GradeTooHighException(void) const
-{
-	throw std::runtime_error("Grade is too high");
-}
-
-void Bureaucrat::GradeTooLowException(void) const
-{
-	throw std::runtime_error("Grade is too low");
-}
-
 Bureaucrat::~Bureaucrat() {}
 
 void Bureaucrat::incrementGrade(void)
 {
 	if (_grade - 1 < 1)
-		GradeTooHighException();
+		throw GradeTooHighException();
 	_grade--;
 }
 
 void Bureaucrat::decrementGrade(void)
 {
 	if (_grade + 1 > 150)
-		GradeTooLowException();
+		throw GradeTooLowException();
 	_grade++;
 }
 
@@ -71,4 +61,14 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &b)
 {
 	os << b.getName() << ", bureaucrat grade " << b.getGrade();
 	return os;
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return "Grade is too high";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Grade is too low";
 }
