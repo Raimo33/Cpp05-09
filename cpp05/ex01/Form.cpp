@@ -6,18 +6,30 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:41:17 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/28 16:29:01 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:22:01 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form() : _name("default"), _signed(false), _min_grade_to_sign(150) {}
+Form::Form() :
+	_name("default"),
+	_signed(false),
+	_min_grade_to_sign(150),
+	_min_grade_to_execute(150){}
 
-Form::Form(const std::string &name, const int min_grade_to_sign) : _name(name), _signed(false), _min_grade_to_sign(min_grade_to_sign) {}
+Form::Form(const std::string &name, const int min_grade_to_sign, const int min_grade_to_execute) :
+	_name(name),
+	_signed(false),
+	_min_grade_to_sign(min_grade_to_sign),
+	_min_grade_to_execute(min_grade_to_execute) {}
 
-Form::Form(const Form &copy) : _name(copy._name), _signed(copy._signed), _min_grade_to_sign(copy._min_grade_to_sign) {}
+Form::Form(const Form &copy) :
+	_name(copy._name),
+	_signed(copy._signed),
+	_min_grade_to_sign(copy._min_grade_to_sign),
+	_min_grade_to_execute(copy._min_grade_to_execute) {}
 
 Form &Form::operator=(const Form &copy)
 {
@@ -26,21 +38,6 @@ Form &Form::operator=(const Form &copy)
 }
 
 Form::~Form() {}
-
-void Form::GradeTooHighException(void) const
-{
-	throw std::runtime_error("Grade is too high");
-}
-
-void Form::GradeTooLowException(void) const
-{
-	throw std::runtime_error("Grade is too low");
-}
-
-void Form::FormAlreadySignedException(void) const
-{
-	throw std::runtime_error("Form is already signed");
-}
 
 std::string Form::getName(void) const
 {
@@ -60,9 +57,9 @@ bool Form::isSigned(void) const
 void Form::beSigned(const Bureaucrat &b)
 {
 	if (isSigned())
-		FormAlreadySignedException();
+		throw AlreadySignedException();
 	if (b.getGrade() > _min_grade_to_sign)
-		GradeTooLowException();
+		throw GradeTooLowException();
 	_signed = true;
 }
 
@@ -75,5 +72,20 @@ std::ostream &operator<<(std::ostream &os, const Form &f)
 		os << "not signed";
 	os << std::endl;
 	return os;
+}
+
+const char *Form::GradeTooHighException::what() const throw()
+{
+	return "Error: Grade is too high";
+}
+
+const char *Form::GradeTooLowException::what() const throw()
+{
+	return "Error: Grade is too low";
+}
+
+const char *Form::AlreadySignedException::what() const throw()
+{
+	return "Error: Form is already signed";
 }
 

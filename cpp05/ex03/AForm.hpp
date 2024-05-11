@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:40:28 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/26 19:56:23 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:25:45 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ class AForm
 		bool isSigned(void) const;
 		void beSigned(const Bureaucrat &b);
 		virtual void execute(const Bureaucrat &executor) const = 0;
+		class GradeTooHighException;
+		class GradeTooLowException;
+		class AlreadySignedException;
+		class NotSignedException;
 	protected:
 		void beExecuted(const Bureaucrat &executor) const;
-		void GradeTooHighException(void) const;
-		void GradeTooLowException(void) const;
-		void FormAlreadySignedException(void) const;
-		void FormNotSignedException(void) const;
 	private:
 		std::string		_name;
 		bool 			_signed;
@@ -47,5 +47,29 @@ class AForm
 };
 
 std::ostream &operator<<(std::ostream &os, const AForm &f);
+
+class AForm::GradeTooHighException : public std::exception
+{
+	public:
+		virtual const char *what() const throw();
+};
+
+class AForm::GradeTooLowException : public std::exception
+{
+	public:
+		virtual const char *what() const throw();
+};
+
+class AForm::AlreadySignedException : public std::exception
+{
+	public:
+		virtual const char *what() const throw();
+};
+
+class AForm::NotSignedException : public std::exception
+{
+	public:
+		virtual const char *what() const throw();
+};
 
 #endif
