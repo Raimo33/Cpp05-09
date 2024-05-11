@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:46:38 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/11 14:11:13 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:12:10 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ size_t Span::longestSpan(void) const
 {
 	if (_current_size < 2)
 		throw NotEnoughElementsException();
-
 	return (*_sorted_numbers.rbegin() - *_sorted_numbers.begin());
 }
 

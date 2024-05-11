@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:33:04 by craimond          #+#    #+#             */
-/*   Updated: 2024/05/11 14:09:09 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:11:10 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ class Span
 		void	print(void);
 		class	NotEnoughElementsException;
 		class	SpanIsFullException;
-		
 	private:
-		std::vector<int> _numbers;
-		std::set<int> _sorted_numbers; // più veloce di std::vector l'inserimento del nuovo numero nella posizione giusta (Red-Black Tree)
-		size_t _capacity;
-		size_t _current_size;
+		std::vector<int> 	_numbers;
+		std::set<int> 		_sorted_numbers; // più veloce di std::vector l'inserimento del nuovo numero nella posizione giusta (Red-Black Tree)
+		size_t 				_capacity;
+		size_t 				_current_size;
 };
 
 std::ostream &operator<<(const std::ostream &os, const Span &span);
