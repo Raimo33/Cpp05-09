@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:59:06 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/30 12:02:36 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:55:25 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,15 @@ Array<T> &Array<T>::operator=(const Array<T> &rhs)
 }
 
 template <typename T>
-T &Array<T>::operator[](const size_t index) const
+const T &Array<T>::operator[](const size_t index) const
+{
+	if (index >= _size || index < 0)
+		throw std::out_of_range("Index out of bounds");
+	return _array[index];
+}
+
+template <typename T>
+T &Array<T>::operator[](const size_t index)
 {
 	if (index >= _size || index < 0)
 		throw std::out_of_range("Index out of bounds");

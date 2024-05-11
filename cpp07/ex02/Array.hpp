@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:14:35 by craimond          #+#    #+#             */
-/*   Updated: 2024/04/29 19:24:26 by craimond         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:54:48 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ class Array
 		Array(const size_t n);
 		Array(const Array &other);
 		~Array();
-		Array &operator=(const Array &rhs);
-		T &operator[](const size_t index) const;
+		Array	&operator=(const Array &rhs);
+		const T	&operator[](const size_t index) const;
+		T 		&operator[](const size_t index);
 		size_t size(void) const;
 	private:
 		T		*_array;
